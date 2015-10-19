@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sqlCls &mdash; weBees Router Backup 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="weBees Router Backup 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for sqlCls</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">pyodbc</span>
+
+<span class="kn">from</span> <span class="nn">dbInfoCls</span> <span class="kn">import</span> <span class="n">DbInfo</span>
+
+
+<div class="viewcode-block" id="SqlFunctions"><a class="viewcode-back" href="../index.html#sqlCls.SqlFunctions">[docs]</a><span class="k">class</span> <span class="nc">SqlFunctions</span><span class="p">(</span><span class="n">DbInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    perform all sql related functions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        testing123</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">SqlFunctions</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="c"># DbInfo.__init__(self)</span>
+        <span class="n">_db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paramsDict</span><span class="p">[</span><span class="s">&#39;DATABASE&#39;</span><span class="p">]</span>
+        <span class="n">_user_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paramsDict</span><span class="p">[</span><span class="s">&#39;UID&#39;</span><span class="p">]</span>
+        <span class="n">_passwd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paramsDict</span><span class="p">[</span><span class="s">&#39;PWD&#39;</span><span class="p">]</span>
+        <span class="n">_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paramsDict</span><span class="p">[</span><span class="s">&#39;SERVER_IP&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connection_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getConnString</span><span class="p">(</span><span class="n">_db</span><span class="p">,</span> <span class="n">_user_id</span><span class="p">,</span> <span class="n">_passwd</span><span class="p">,</span> <span class="n">_host</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCursor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userID</span> <span class="o">=</span> <span class="s">&quot;NA&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userID</span> <span class="o">=</span> <span class="s">&quot;NA&quot;</span>
+
+    <span class="k">def</span> <span class="nf">getConnString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_db</span><span class="p">,</span> <span class="n">_user_id</span><span class="p">,</span> <span class="n">_passwd</span><span class="p">,</span> <span class="n">_host</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;DRIVER={SQL Server};&#39;</span> <span class="o">+</span> \
+               <span class="s">&#39;SERVER=&#39;</span> <span class="o">+</span> <span class="n">_host</span> <span class="o">+</span> \
+               <span class="s">&#39;;&#39;</span> <span class="s">&#39;DATABASE=&#39;</span> <span class="o">+</span> <span class="n">_db</span> <span class="o">+</span> \
+               <span class="s">&#39;;&#39;</span> <span class="s">&#39;UID=&#39;</span> <span class="o">+</span> <span class="n">_user_id</span> <span class="o">+</span> \
+               <span class="s">&#39;;&#39;</span> <span class="s">&#39;PWD=&#39;</span> <span class="o">+</span> <span class="n">_passwd</span>
+
+    <span class="k">def</span> <span class="nf">getUserId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uName</span><span class="p">,</span> <span class="n">pName</span><span class="p">):</span>
+
+        <span class="c">#upOptions = {</span>
+        <span class="c">#    userID: (uName, pName),</span>
+        <span class="c">#    &#39;1&#39;:(&#39;webees&#39;, &#39;wb&#39;),</span>
+        <span class="c">#    &#39;2&#39;:(&#39;BeeComm&#39;, &#39;beecomm13&#39;),</span>
+        <span class="c">#    &#39;3&#39;:(&#39;Retalix&#39;, &#39;Retalix1&#39;)</span>
+        <span class="c">#}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;{call [RouterBackup].[dbo].[Authentication](?,?)}&#39;</span><span class="p">,</span> <span class="n">uName</span><span class="p">,</span> <span class="n">pName</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">Row</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">userID</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">userID</span><span class="p">,</span> <span class="n">uName</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># return (&quot;NA&quot;,&quot;-E- DB didnt return any valid line&quot;)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="s">&quot;err&quot;</span><span class="p">,</span><span class="s">&quot;Authentication&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setUserId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userID</span> <span class="o">=</span> <span class="n">userId</span>
+
+    <span class="k">def</span> <span class="nf">getCustomerList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">userID</span> <span class="o">==</span> <span class="s">&quot;NA&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">999</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;{call [RouterBackup].[dbo].[GetInfo_Cus](?)}&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">userID</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">Row</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">cus</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">customerIndex</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cusID</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">customerIndex</span><span class="p">)</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">cus</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cusID</span>
+            <span class="c">#return cusID + &quot;;&quot; + cus</span>
+            <span class="k">return</span> <span class="n">d</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot; ; &quot;</span>
+            <span class="k">return</span> <span class="s">&quot;999&quot;</span>
+
+    <span class="k">def</span> <span class="nf">getFranchisesList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cusID</span><span class="p">):</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">frString</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">indexString</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;{call [RouterBackup].[dbo].[GetInfo_FR](?)}&#39;</span><span class="p">,</span> <span class="n">cusID</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">fr</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">ind</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">fr</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
+                <span class="c">#print fr ,&quot; &quot;, ind</span>
+                <span class="c">#d[ind] = fr</span>
+                <span class="c">#frString += fr + &quot;,&quot;</span>
+                <span class="c">#indexString += str(ind) + &quot;,&quot;</span>
+            <span class="c">#return frString + &quot;;&quot; + indexString</span>
+            <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">getBranchList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">frID</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="c">#s = &#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;{call [RouterBackup].[dbo].[GetInfo_BR](?)}&#39;</span><span class="p">,</span> <span class="n">frID</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">br</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">ind</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">br</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
+                <span class="c">#s += br + &quot;,&quot;</span>
+            <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">getZoneList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">zoneDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;{call [RouterBackup].[dbo].[GetZone]}&#39;</span><span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="c">#zoneString = &quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">zone</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c">#zoneString += zone.encode(&#39;cp1255&#39;) + &#39;,&#39;</span>
+                <span class="c">#print type(zone)</span>
+                <span class="n">ind</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">zoneDict</span><span class="p">[</span><span class="n">zone</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span>
+            <span class="k">return</span> <span class="n">zoneDict</span>
+
+<div class="viewcode-block" id="SqlFunctions.getCursor"><a class="viewcode-back" href="../index.html#sqlCls.SqlFunctions.getCursor">[docs]</a>    <span class="k">def</span> <span class="nf">getCursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+
+<span class="sd">        A cursor for the sql connection</span>
+<span class="sd">        using pyodbc.connect</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cnxn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_connection_string</span><span class="p">)</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">cursor</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Sivan Becker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

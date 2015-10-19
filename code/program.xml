@@ -1,0 +1,22 @@
+<Configuration>
+  <Server>
+    <NAME>"WeBeesSQL"</NAME>
+    <DATABASE>"RouterBackup"</DATABASE>
+    <IP>185.18.205.108</IP>
+    <PORT>101</PORT>
+    <UID>"sa"</UID>
+    <PWD>"7456037@Si"</PWD>
+  </Server>
+  <VerNum>1.0</VerNum>
+  <InstallationFolder>C:\Program Files\WeBees\WB_RouterBackup\</InstallationFolder>
+  <CheckExpiredInterval>60000</CheckExpiredInterval>
+  <saveSuccessful>the router config was save Successful, You are now now Fully protected</saveSuccessful>
+  <ErrorMsg>
+    <LicenseExpired>Software license expired, please contact Support.</LicenseExpired>
+    <Authentication>Username or Password are incorrect, Please try again.</Authentication>
+    <NotSupported>The Router is not Supported, Please contact us at: Support@WeBees.Co.il</NotSupported>
+    <RouterNotConnecting>The router is not Available, make sure it's Plugged in and turned on. Then try again.</RouterNotConnecting>
+  </ErrorMsg>
+  <UploadSuccessful>the Upload was done Successful</UploadSuccessful>
+  <UploadFail>the Upload was Failed,Please try Again</UploadFail>
+</Configuration>

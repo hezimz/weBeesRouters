@@ -1,0 +1,310 @@
+{
+    "routers":{
+        "edimax br6214k":{
+            "auth":{
+                "loginUsername" : "admin",
+                "loginPassword" : "1234"
+                },
+            "backup":{
+                "url" : "http://192.168.2.1/config.cfg",
+                "data" : {"save":"Save..."},
+                "method":"GET"
+                },
+            "restore":{
+                "url":"http://192.168.2.1/goform/formSaveConfig",
+                "data" : {"load":"Upload"},
+                "method":"POST",
+                "fileStr":"binary"
+                },
+            "login":{
+                "url":"",
+                "method":"GET",
+                "data":{}
+            },    
+            "loginRequestUrl":"http://192.168.2.1/goform/login",
+            "cfgFile":{
+                "name":"config.cfg",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "edimax br6428ns":{
+            "auth":{
+                "loginUsername" : "admin",
+                "loginPassword" : "1234"
+            },
+            "backup":{
+                "url" : "http://192.168.2.1/goform/formSaveConfig",
+                "data" : {"save":"Save..."},
+                "method":"POST"
+            },
+            "restore":{
+                "url":"http://192.168.2.1/goform/formSaveConfig",
+                "data" : {"load":"Upload"},
+                "method":"POST",
+                "fileStr":"binary"
+            },
+            "login":{
+                "url":"/goform/login",
+                "method":"GET",
+                "data":{}
+
+            },
+            "loginRequestUrl":"http://192.168.2.1/goform/login",
+            "cfgFile":{
+                "name":"config.bin",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "edimax br6226n":{
+            "auth":{
+                "loginUsername" : "admin",
+                "loginPassword" : "1234"
+            },
+            "backup":{
+                "url" : "http://192.168.2.1/goform/formSaveConfig",
+                "data" : {"save":"Save..."},
+                "method":"POST"
+            },
+            "restore":{
+                "url":"http://192.168.2.1/goform/formSaveConfig",
+                "data" : {"load":"Upload"},
+                "method":"POST",
+                "fileStr":"binary"
+            },
+            "login":{
+                "url":"/goform/login",
+                "method":"GET",
+                "data":{}
+
+            },
+            "loginRequestUrl":"http://192.168.2.1/goform/login",
+            "cfgFile":{
+                "name":"config.bin",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "netgear dgn2200v2":{
+            "auth":{
+                "loginUsername" : "Admin",
+                "loginPassword" : "Admin"
+                },
+            "login":{
+                "url":"/start.htm",
+                "method":"GET",
+                "data":{}
+                
+            },
+            "backup":{
+                "url":"/NETGEAR_DGN2200v2.cfg",
+                "data":{},
+                "method":"GET"
+                
+                },
+            "restore":{
+                "url":"/backup.cgi",
+                "data":{"mtenRestore":"Restore"},
+                "method":"POST",
+                "fileStr":"mtenRestoreCfg"
+            },
+            "reset":{
+            "url":"",
+            "data":{},
+            "method":"POST"
+            },
+            "cfgFile":{
+                "name":"NETGEAR_DGN2200v2.cfg" ,
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "netgear vegn2610":{
+            "auth":{
+                "loginUsername" : "Admin",
+                "loginPassword" : "Admin"
+            },
+            "login":{
+                "url":"/start.htm",
+                "method":"GET",
+                "data":{}
+
+            },
+            "backup":{
+                "url":"/NETGEAR_VEGN2610.cfg",
+                "data":{},
+                "method":"GET"
+
+            },
+            "restore":{
+                "url":"/backup.cgi?",
+                "data":{"mtenRestore":"Restore"},
+                "method":"POST",
+                "fileStr":"mtenRestoreCfg"
+            },
+            "reset":{
+                "url":"/newgui_adv_home.cgi?",
+                "data":{"buttonSelect":"2", "wantype":"pppoe", "enable_apmode":"0"},
+                "method":"POST"
+            },
+            "cfgFile":{
+                "name":"NETGEAR_VEGN2610.cfg" ,
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "hotbox f@st3184":{
+            "auth":{
+                "loginUsername" : "admin",
+                "loginPassword" : "1q3e5t"
+                },
+            "login":{
+                "url":"/goform/login",
+                "method":"POST",
+                "data":{"loginUsername":"admin","loginPassword":"1q3e5t"}
+            },
+            "backup":{
+                "url":"/GatewaySettings.bin",
+                "data":{},
+                "method":"GET"
+                },
+            "restore":{
+                "url":"/goform/RgBackup",
+                "data":{},
+                "method":"POST",
+                "fileStr":"ImportFile"
+                },
+            "reset":{
+                "url":"/goform/RgSetup",
+                "data":{},
+                "method":"POST"
+            },
+            "cfgFile":{
+                "name":"GatewaySettings.bin",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "dlink DSL-2500U":{
+            "auth":{
+                "loginUsername" : "Admin",
+                "loginPassword" : "Admin"
+                },            
+            "backup":{
+                "url":"/backupsettings.conf",
+                "data":{},
+                "method":"GET"                
+            },
+            "restore":{
+                "url":"/uploadsettings.cgi",
+                "method":"POST",
+                "data":{},
+                "fileStr":"filename"
+            },
+            "login":{
+                "url":"",
+                "method":"GET",
+                "data":{}
+            },
+            "reset":{
+            "url":"/rebootinfo.cgi",
+            "method":"GET",
+            "data":{}
+          },
+            "cfgFile":{
+                "name":"backupsettings.conf",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "dlink DSL-6740U":{
+            "auth":{
+                "loginUsername" : "Admin",
+                "loginPassword" : "Admin"
+                },
+            "login":{
+                "url":"/login.cgi",
+                "method":"GET",
+                "data":{}
+            },
+            "backup":{
+                "url":"/backupsettings.conf",
+                "data":{},
+                "method":"GET"                
+            },
+            "restore":{
+                "url":"/uploadsettings.cgi",
+                "method":"POST",
+                "data":{},
+                "fileStr":"filename"
+            },
+            "cfgFile":{
+                "name":"backupsettings.conf",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "dlink DSL-6850U":{
+            "auth":{
+                "loginUsername" : "Admin",
+                "loginPassword" : "Admin"
+            },
+            "login":{
+                "url":"",
+                "method":"GET",
+                "data":{}
+            },
+            "backup":{
+                "url":"/backupsettings.conf",
+                "data":{},
+                "method":"GET"
+            },
+            "restore":{
+                "url":"/uploadsettings.cgi",
+                "method":"POST",
+                "data":{},
+                "fileStr":"filename"
+            },
+            "reset":{
+              "url":"/rebootinfo.cgi?sessionKey=1679474814",
+              "method":"GET",
+              "data":{}
+            },
+            "cfgFile":{
+                "name":"backupsettings.conf",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        },
+        "tplink WR740N":{
+            "auth":{
+                "loginUsername" : "admin",
+                "loginPassword" : "admin"
+            },
+            "login":{
+                "url":"",
+                "method":"GET",
+                "data":{}
+            },
+            "backup":{
+                "url":"/userRpm/config.bin",
+                "data":{},
+                "method":"GET"
+            },
+            "restore":{
+                "url":"/uploadsettings.cgi",
+                "method":"POST",
+                "data":{},
+                "fileStr":"filename"
+            },
+            "cfgFile":{
+                "name":"backupsettings.conf",
+                "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+            }
+        }
+    },
+    "db":{
+        "NAME":"WeBeesSQL",
+        "SERVER_IP":"185.18.205.108",
+        "DATABASE":"RouterBackup",
+        "UID":"sa",
+        "PWD":"7456037@Si"
+        
+    },
+    "localUserInfo":{
+        "fileName":"user_data.csv",
+        "location":"F:/SKYDRV/sivanStudies/OneDrive/Studies/softwareLanguages/Python/privateProject/routers/"
+    }
+}

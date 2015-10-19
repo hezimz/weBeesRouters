@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>manageXml &mdash; weBees Router Backup 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="weBees Router Backup 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for manageXml</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">view_defs</span> <span class="kn">import</span> <span class="n">general_defs</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c"># set Logging level</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;-</span><span class="si">%(levelname)s</span><span class="s">- </span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
+                    <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%m/</span><span class="si">%d</span><span class="s">/%Y %I:%M:%S %p&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">general_defs</span><span class="p">[</span><span class="s">&#39;_logging_level&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="XmlParser"><a class="viewcode-back" href="../index.html#manageXml.XmlParser">[docs]</a><span class="k">class</span> <span class="nc">XmlParser</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_file</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>  <span class="c"># private variable containing the xml file to parse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Initialized an XML parser&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_xml_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_xml_file</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">_xml_file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ET</span><span class="o">.</span><span class="n">ParseError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s">&quot;Failed parsing XML file: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">_xml_file</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ET</span><span class="o">.</span><span class="n">ParseError</span>
+
+    <span class="k">def</span> <span class="nf">set_xml_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">):</span>
+        <span class="c"># this is a setter , for setting the xml_file private variable</span>
+        <span class="c"># before we can parse any xml data</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">xml_file_name</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Setting current XML file to be: </span><span class="si">%s</span><span class="s"> &#39;</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xml_file</span> <span class="o">=</span> <span class="n">xml_file_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;XML file given is not valid: </span><span class="si">%s</span><span class="s"> &#39;</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">parse_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># this method will check if there is an xml</span>
+        <span class="c"># file updated in self._xml_file</span>
+        <span class="c"># and then try to parse it using xml.etree...</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_file</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s">&quot;Found an empty xml file name while trying to parse xml, first set &quot;</span>
+                             <span class="s">&quot;the xml file source&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_xml_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_file</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">except</span> <span class="n">ET</span><span class="o">.</span><span class="n">ParseError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="c"># [&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__delitem__&#39;, &#39;__dict__&#39;, &#39;__doc__&#39;, &#39;__format__&#39;,</span>
+            <span class="c"># &#39;__getattribute__&#39;, &#39;__getitem__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__len__&#39;, &#39;__module__&#39;,</span>
+            <span class="c"># &#39;__new__&#39;, &#39;__nonzero__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;,</span>
+            <span class="c"># &#39;__setitem__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;,</span>
+            <span class="c"># &#39;_children&#39;, &#39;append&#39;, &#39;attrib&#39;, &#39;clear&#39;, &#39;copy&#39;, &#39;extend&#39;, &#39;find&#39;, &#39;findall&#39;,</span>
+            <span class="c"># &#39;findtext&#39;, &#39;get&#39;, &#39;getchildren&#39;, &#39;getiterator&#39;, &#39;insert&#39;, &#39;items&#39;, &#39;iter&#39;,</span>
+            <span class="c"># &#39;iterfind&#39;, &#39;itertext&#39;, &#39;keys&#39;, &#39;makeelement&#39;, &#39;remove&#39;, &#39;set&#39;, &#39;tag&#39;, &#39;tail&#39;, &#39;text&#39;]</span>
+            <span class="c">#for child in self._root:</span>
+                <span class="c">#print child.tag , child.attrib</span>
+
+    <span class="k">def</span> <span class="nf">get_error_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># by element i mean an xml tree element</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;ErrorMsg&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">child</span>
+
+    <span class="k">def</span> <span class="nf">get_server_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># by element i mean an xml tree element</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;Server&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">child</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Sivan Becker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
