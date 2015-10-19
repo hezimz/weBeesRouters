@@ -30,14 +30,14 @@ class MyPopupDialog(QDialog):
         self.accept()
 
 
-class AuthForm(QDialog, SqlFunctions):
+class AuthFormCtrl(QDialog, SqlFunctions):
 
     # err_msgs_inst is a ErrorMsgs instance
     # with which i can pull any type of
     # error message that is written in the program XML
     # according to its type (authentication ,license,...)
     def __init__(self, err_msgs_inst):
-        super(AuthForm, self).__init__()
+        super(AuthFormCtrl, self).__init__()
         SqlFunctions.__init__(self)
         self._err_msgs_inst = err_msgs_inst
         self.setLayoutDirection(Qt.RightToLeft)
@@ -47,8 +47,19 @@ class AuthForm(QDialog, SqlFunctions):
         label_font = QFont(auth_defs['label_font'], auth_defs['label_font_size'])
         header_font = QFont(auth_defs['label_font'], auth_defs['header_font_size'], QFont.Bold)
         align_r = Qt.AlignRight
+        align_l = Qt.AlignLeft
         palette = QPalette()
         palette.setColor(QPalette.Foreground, Qt.darkBlue)
+
+        # support label
+        header_label = QLabel(auth_defs['h_auth_header'].decode(general_defs['_decoding']))
+        header_label.setFont(header_font)
+
+        # webees image
+        img_label = QLabel()
+        my_pixmap = QPixmap('WeBees Logo - small.png')
+        my_scaled_pixmap = my_pixmap.scaled(auth_defs['logoH'], auth_defs['logoW'], Qt.KeepAspectRatio)
+        img_label.setPixmap(my_scaled_pixmap)
 
         # username
         u_label = QLabel(auth_defs['h_username'].decode(general_defs['_decoding']))
@@ -66,16 +77,31 @@ class AuthForm(QDialog, SqlFunctions):
 
         # button for authentication
         self.auth_btn = QPushButton(auth_defs['h_login'].decode(general_defs['_decoding']))
+        self.auth_btn.setMaximumWidth(100)
+
+        # support label
+        support_label = QLabel(auth_defs['en_support'].decode(general_defs['_decoding']))
 
         # set the widgets on the layout
         grid = QGridLayout()  # create grid Object
-        grid.addWidget(u_label, 0, 0, align_r)  # add username label to grid
-        grid.addWidget(self.u_value, 0, 1, align_r)  # add username textbox to grid
 
-        grid.addWidget(p_label, 1, 0, align_r)  # add password label to grid
-        grid.addWidget(self.p_value, 1, 1, align_r)  # add password textbox to grid
+        form_grid = QGridLayout()
+        img_grid = QGridLayout();
 
-        grid.addWidget(self.auth_btn, 2, 4, align_r)  # add login button to the grid
+        grid.addLayout(img_grid,0,1, align_l)
+        grid.addLayout(form_grid,0,0, align_r)
+
+        form_grid.addWidget(header_label, 0, 0, align_r) # add Gui Header
+        form_grid.addWidget(u_label, 1, 0, align_r)  # add username label to grid
+        form_grid.addWidget(self.u_value, 1, 1, align_r)  # add username textbox to grid
+        form_grid.addWidget(p_label, 2, 0, align_r)  # add password label to grid
+        form_grid.addWidget(self.p_value, 2, 1, align_r)  # add password textbox to grid
+
+        img_grid.addWidget(img_label,0, 0, align_l) # add webees icon on the left
+
+        grid.addWidget(self.auth_btn, 1, 0,1,1)  # add login button to the grid
+
+        grid.addWidget(support_label, 2, 1, align_l)
 
         self.setLayout(grid)  # "close" grid
 
@@ -108,3 +134,75 @@ class AuthForm(QDialog, SqlFunctions):
 
     def set_u_name_index(self, val):
         self._uNameIndex = val
+
+class ViewAuthForm (QDialog):
+
+    # err_msgs_inst is a ErrorMsgs instance
+    # with which i can pull any type of
+    # error message that is written in the program XML
+    # according to its type (authentication ,license,...)
+    def __init__(self):
+        super(ViewAuthForm, self).__init__()
+        self.setLayoutDirection(Qt.RightToLeft)
+        # Gui layout
+        label_font = QFont(auth_defs['label_font'], auth_defs['label_font_size'])
+        header_font = QFont(auth_defs['label_font'], auth_defs['header_font_size'], QFont.Bold)
+        align_r = Qt.AlignRight
+        align_l = Qt.AlignLeft
+        palette = QPalette()
+        palette.setColor(QPalette.Foreground, Qt.darkBlue)
+
+        # support label
+        header_label = QLabel(auth_defs['h_auth_header'].decode(general_defs['_decoding']))
+        header_label.setFont(header_font)
+
+        # webees image
+        img_label = QLabel()
+        my_pixmap = QPixmap('WeBees Logo - small.png')
+        my_scaled_pixmap = my_pixmap.scaled(auth_defs['logoH'], auth_defs['logoW'], Qt.KeepAspectRatio)
+        img_label.setPixmap(my_scaled_pixmap)
+
+        # username
+        u_label = QLabel(auth_defs['h_username'].decode(general_defs['_decoding']))
+        u_label.setFont(label_font)
+
+        # password
+        p_label = QLabel(auth_defs['h_password'].decode(general_defs['_decoding']))
+        p_label.setFont(label_font)
+
+        # just for testing i can set the values for the user
+        self.u_value = QLineEdit('BeeComm')
+        self.p_value = QLineEdit('beecomm13')
+        # self.u_value = QLineEdit('Retalix')
+        # self.p_value = QLineEdit('Retalix1')
+
+        # button for authentication
+        self.auth_btn = QPushButton(auth_defs['h_login'].decode(general_defs['_decoding']))
+        self.auth_btn.setMaximumWidth(100)
+
+        # support label
+        support_label = QLabel(auth_defs['en_support'].decode(general_defs['_decoding']))
+
+        # set the widgets on the layout
+        grid = QGridLayout()  # create grid Object
+
+        form_grid = QGridLayout()
+        img_grid = QGridLayout();
+
+        grid.addLayout(img_grid,0,1, align_l)
+        grid.addLayout(form_grid,0,0, align_r)
+
+        form_grid.addWidget(header_label, 0, 0, align_r) # add Gui Header
+        form_grid.addWidget(u_label, 1, 0, align_r)  # add username label to grid
+        form_grid.addWidget(self.u_value, 1, 1, align_r)  # add username textbox to grid
+        form_grid.addWidget(p_label, 2, 0, align_r)  # add password label to grid
+        form_grid.addWidget(self.p_value, 2, 1, align_r)  # add password textbox to grid
+
+        img_grid.addWidget(img_label,0, 0, align_l) # add webees icon on the left
+
+        grid.addWidget(self.auth_btn, 1, 0,1,1)  # add login button to the grid
+
+        grid.addWidget(support_label, 2, 1, align_l)
+
+        self.setLayout(grid)  # "close" grid
+

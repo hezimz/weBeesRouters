@@ -5,7 +5,7 @@ import sys
 
 from manageXml import XmlParser
 from errorMsgsCls import ErrorMsgs
-from authCls import AuthForm
+from authCls import AuthFormCtrl, ViewAuthForm
 from registerCls import RegisterForm
 from view_defs import auth_defs, general_defs, regsiter_defs
 
@@ -24,8 +24,15 @@ err_msgs_inst = ErrorMsgs(xml_parser.get_error_element())
 # Load Authentication Form
 logging.info("Loading authentication form")
 app = QApplication(sys.argv)
-auth_form = AuthForm(err_msgs_inst)
-auth_form.setWindowTitle(auth_defs['h_identification_window'].decode(general_defs['_decoding']))
+
+view_auth_form = ViewAuthForm()
+view_auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
+view_auth_form.show()
+app.exec_()
+
+
+auth_form = AuthFormCtrl(err_msgs_inst)
+auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
 auth_form.show()
 app.exec_()
 

@@ -24,7 +24,9 @@ Contents:
 .. automodule:: sqlCls
    :members:
 
+.. autoclass:: dbInfoCls
 
+   .. py:method:: getSqlName
 
 Indices and tables
 ==================

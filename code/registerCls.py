@@ -6,6 +6,7 @@ from sqlCls import SqlFunctions
 from recognizeCls import Recognize
 from userCls import User
 
+from view_defs import auth_defs
 
 class RegisterForm(QDialog, SqlFunctions, User):
     def __init__(self, user_id):
@@ -29,8 +30,8 @@ class RegisterForm(QDialog, SqlFunctions, User):
         self.comboboxMinWidth = 180
         palette = QPalette()
         palette.setColor(QPalette.Foreground, Qt.darkBlue)
-        self.logoW = 400
-        self.logoH = 200
+        #self.logoW = 400
+        #self.logoH = 200
         # router type
         r_label = QLabel('סוג ראוטר '.decode('utf-8'))
         r_label.setFont(label_font)
@@ -49,7 +50,7 @@ class RegisterForm(QDialog, SqlFunctions, User):
         # webees image
         img_label = QLabel()
         my_pixmap = QPixmap('WeBees Logo - small.png')
-        my_scaled_pixmap = my_pixmap.scaled(self.logoH, self.logoW, Qt.KeepAspectRatio)
+        my_scaled_pixmap = my_pixmap.scaled(auth_defs['logoH'], auth_defs['logoW'], Qt.KeepAspectRatio)
         img_label.setPixmap(my_scaled_pixmap)
 
         # customer choosing ( Beecomm, Retalix)

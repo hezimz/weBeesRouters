@@ -2,6 +2,10 @@ from paramsCls import ParamsLoader
 
 
 class DbInfo(ParamsLoader):
+    """
+
+    Get database parameters
+    """
 
     def __init__(self):
         super(DbInfo, self).__init__()
