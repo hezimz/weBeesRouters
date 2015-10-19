@@ -3,6 +3,7 @@ import logging
 from PyQt4.QtGui import *
 import sys
 
+from generalFunctions import get_qicon
 from manageXml import XmlParser
 from errorMsgsCls import ErrorMsgs
 from authCls import AuthFormCtrl, ViewAuthForm
@@ -27,8 +28,11 @@ app = QApplication(sys.argv)
 
 auth_form = AuthFormCtrl(err_msgs_inst)
 auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
+auth_form.setWindowIcon(get_qicon(general_defs['icon']))
+auth_form.setFixedSize(500, 150)
 auth_form.show()
 app.exec_()
+
 
 if auth_form.get_u_name_index() == "NA":  # this is basically the same as userID that i defined in sql Class
     app.exit(1)

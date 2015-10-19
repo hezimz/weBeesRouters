@@ -13,6 +13,8 @@ general_defs['_decoding'] = "utf-8"
 general_defs['popup_window_min_width'] = 400
 general_defs['_logging_level'] = logging.INFO
 general_defs['_logo_small'] = "WeBees Logo - small.png"
+general_defs['icon'] = "WebeesIcon.ico"
+
 # Authentication GUI
 auth_defs = dict()
 auth_defs['h_auth_header'] = 'מסך התחברות:'

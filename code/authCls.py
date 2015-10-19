@@ -3,6 +3,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import logging
 
+from viewCls import View
 from sqlCls import SqlFunctions
 from view_defs import auth_defs, general_defs, qt_v_defs
 
@@ -10,10 +11,9 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S
                     level=general_defs['_logging_level'])
 
 
-class MyPopupDialog(QDialog):
+class MyPopupDialog(View):
     def __init__(self, error_msg):
         super(MyPopupDialog, self).__init__()
-        self.setLayoutDirection(Qt.RightToLeft)
         logging.error(error_msg)
         err_label = QLabel(error_msg)
         self.close_btn = QPushButton(auth_defs['h_close_popup'].decode(general_defs['_decoding']))
@@ -30,7 +30,7 @@ class MyPopupDialog(QDialog):
         self.accept()
 
 
-class ViewAuthForm (QDialog):
+class ViewAuthForm (View):
 
     # err_msgs_inst is a ErrorMsgs instance
     # with which i can pull any type of
@@ -38,10 +38,6 @@ class ViewAuthForm (QDialog):
     # according to its type (authentication ,license,...)
     def __init__(self):
         super(ViewAuthForm, self).__init__()
-        self.setLayoutDirection(Qt.RightToLeft)
-        align_r = Qt.AlignRight
-        align_l = Qt.AlignLeft
-        palette = qt_v_defs['palette']
 
         # support label
         header_label = QLabel(auth_defs['h_auth_header'].decode(general_defs['_decoding']))
@@ -69,8 +65,8 @@ class ViewAuthForm (QDialog):
 
         # button for authentication
         self.auth_btn = QPushButton(auth_defs['h_login'].decode(general_defs['_decoding']))
-        self.auth_btn.setMaximumWidth(100)
-
+        #self.auth_btn.setMaximumWidth(150)
+        self.auth_btn.setFont(qt_v_defs['qt_label_font'])
         # support label
         support_label = QLabel(auth_defs['en_support'].decode(general_defs['_decoding']))
 
@@ -78,10 +74,8 @@ class ViewAuthForm (QDialog):
         grid = QGridLayout()  # create grid Object
 
         form_grid = QGridLayout()
-        img_grid = QGridLayout()
 
-        grid.addLayout(img_grid,0,1, align_l)
-        grid.addLayout(form_grid,0,0, qt_v_defs['align_r'])
+        grid.addLayout(form_grid,0,0,1,2, qt_v_defs['align_r'])
 
         form_grid.addWidget(header_label, 0, 0, qt_v_defs['align_r']) # add Gui Header
         form_grid.addWidget(u_label, 1, 0, qt_v_defs['align_r'])  # add username label to grid
@@ -89,11 +83,12 @@ class ViewAuthForm (QDialog):
         form_grid.addWidget(p_label, 2, 0, qt_v_defs['align_r'])  # add password label to grid
         form_grid.addWidget(self.p_value, 2, 1, qt_v_defs['align_r'])  # add password textbox to grid
 
-        img_grid.addWidget(img_label,0, 0, align_l) # add webees icon on the left
+        #img_grid.addWidget(img_label,0, 0, qt_v_defs['align_l']) # add webees icon on the left
+        grid.addWidget(img_label,0, 2, qt_v_defs['align_l']) # add webees icon on the left
 
-        grid.addWidget(self.auth_btn, 1, 0,1,1)  # add login button to the grid
+        grid.addWidget(self.auth_btn, 1, 1)  # add login button to the grid
 
-        grid.addWidget(support_label, 2, 1, align_l)
+        grid.addWidget(support_label, 2, 2, qt_v_defs['align_r'])
 
         self.setLayout(grid)  # "close" grid
 
@@ -109,7 +104,7 @@ class AuthFormCtrl(ViewAuthForm, SqlFunctions):
     def __init__(self,  err_msgs_inst):
         super(AuthFormCtrl, self).__init__()
         SqlFunctions.__init__(self)
-        ViewAuthForm.__init__(self)
+        #ViewAuthForm.__init__(self)
 
         self._err_msgs_inst = err_msgs_inst
         self._uName = ""
