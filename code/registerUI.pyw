@@ -25,12 +25,6 @@ err_msgs_inst = ErrorMsgs(xml_parser.get_error_element())
 logging.info("Loading authentication form")
 app = QApplication(sys.argv)
 
-view_auth_form = ViewAuthForm()
-view_auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
-view_auth_form.show()
-app.exec_()
-
-
 auth_form = AuthFormCtrl(err_msgs_inst)
 auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
 auth_form.show()
