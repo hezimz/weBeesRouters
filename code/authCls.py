@@ -6,6 +6,7 @@ import logging
 from viewCls import View
 from sqlCls import SqlFunctions
 from view_defs import auth_defs, general_defs, qt_v_defs
+from generalFunctions import get_scaled_pixmap
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     level=general_defs['_logging_level'])
@@ -16,8 +17,8 @@ class MyPopupDialog(View):
         super(MyPopupDialog, self).__init__()
         logging.error(error_msg)
         err_label = QLabel(error_msg)
-        self.close_btn = QPushButton(auth_defs['h_close_popup'].decode(general_defs['_decoding']))
-        self.setWindowTitle(auth_defs['h_error_msg'].decode(general_defs['_decoding']))
+        self.close_btn = QPushButton(auth_defs['h_close_popup'])
+        self.setWindowTitle(auth_defs['h_error_msg'])
         self.setMinimumWidth(general_defs['popup_window_min_width'])
         grid = QGridLayout()
         grid.addWidget(err_label)
@@ -40,21 +41,21 @@ class ViewAuthForm (View):
         super(ViewAuthForm, self).__init__()
 
         # support label
-        header_label = QLabel(auth_defs['h_auth_header'].decode(general_defs['_decoding']))
+        header_label = QLabel(auth_defs['h_auth_header'])
         header_label.setFont(qt_v_defs['qt_header_font'])
 
         # webees image
         img_label = QLabel()
-        my_pixmap = QPixmap(general_defs['_logo_small'])
-        my_scaled_pixmap = my_pixmap.scaled(auth_defs['logoH'], auth_defs['logoW'], Qt.KeepAspectRatio)
-        img_label.setPixmap(my_scaled_pixmap)
+        # my_pixmap = QPixmap(general_defs['_logo_small'])
+        # my_scaled_pixmap = my_pixmap.scaled(general_defs['logoH'], general_defs['logoW'], Qt.KeepAspectRatio)
+        img_label.setPixmap(get_scaled_pixmap(general_defs['_logo_small']))
 
         # username
-        u_label = QLabel(auth_defs['h_username'].decode(general_defs['_decoding']))
+        u_label = QLabel(auth_defs['h_username'])
         u_label.setFont(qt_v_defs['qt_label_font'])
 
         # password
-        p_label = QLabel(auth_defs['h_password'].decode(general_defs['_decoding']))
+        p_label = QLabel(auth_defs['h_password'])
         p_label.setFont(qt_v_defs['qt_label_font'])
 
         # just for testing i can set the values for the user
@@ -64,11 +65,11 @@ class ViewAuthForm (View):
         # self.p_value = QLineEdit('Retalix1')
 
         # button for authentication
-        self.auth_btn = QPushButton(auth_defs['h_login'].decode(general_defs['_decoding']))
+        self.auth_btn = QPushButton(auth_defs['h_login'])
         #self.auth_btn.setMaximumWidth(150)
         self.auth_btn.setFont(qt_v_defs['qt_label_font'])
         # support label
-        support_label = QLabel(auth_defs['en_support'].decode(general_defs['_decoding']))
+        support_label = QLabel(auth_defs['en_support'])
 
         # set the widgets on the layout
         grid = QGridLayout()  # create grid Object
@@ -93,16 +94,16 @@ class ViewAuthForm (View):
         self.setLayout(grid)  # "close" grid
 
 
-## Here starts the Auth Controller Class definition
+# Here starts the Auth Controller Class definition
 
-class AuthFormCtrl(ViewAuthForm, SqlFunctions):
+class CtrlAuthForm(ViewAuthForm, SqlFunctions):
 
     # err_msgs_inst is a ErrorMsgs instance
     # with which i can pull any type of
     # error message that is written in the program XML
     # according to its type (authentication ,license,...)
     def __init__(self,  err_msgs_inst):
-        super(AuthFormCtrl, self).__init__()
+        super(CtrlAuthForm, self).__init__()
         SqlFunctions.__init__(self)
         #ViewAuthForm.__init__(self)
 

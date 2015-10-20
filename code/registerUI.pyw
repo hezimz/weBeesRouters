@@ -6,7 +6,7 @@ import sys
 from generalFunctions import get_qicon
 from manageXml import XmlParser
 from errorMsgsCls import ErrorMsgs
-from authCls import AuthFormCtrl, ViewAuthForm
+from authCls import CtrlAuthForm
 from registerCls import RegisterForm
 from view_defs import auth_defs, general_defs, regsiter_defs
 
@@ -26,7 +26,7 @@ err_msgs_inst = ErrorMsgs(xml_parser.get_error_element())
 logging.info("Loading authentication form")
 app = QApplication(sys.argv)
 
-auth_form = AuthFormCtrl(err_msgs_inst)
+auth_form = CtrlAuthForm(err_msgs_inst)
 auth_form.setWindowTitle(auth_defs['en_identification_window'].decode(general_defs['_decoding']))
 auth_form.setWindowIcon(get_qicon(general_defs['icon']))
 auth_form.setFixedSize(500, 150)

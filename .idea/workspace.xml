@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8920ee4-925c-4b47-ba8e-82377a851dac" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/generalFunctions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/authCls.py" afterPath="$PROJECT_DIR$/code/authCls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/generalFunctions.py" afterPath="$PROJECT_DIR$/code/generalFunctions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/registerCls.py" afterPath="$PROJECT_DIR$/code/registerCls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/registerUI.pyw" afterPath="$PROJECT_DIR$/code/registerUI.pyw" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/viewCls.py" afterPath="$PROJECT_DIR$/code/viewCls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/view_defs.py" afterPath="$PROJECT_DIR$/code/view_defs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="weBeesRouters.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,9 +33,33 @@
         <entry file="file://$PROJECT_DIR$/code/view_defs.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="27" />
               <folding>
                 <element signature="e#131#145#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerCls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/registerCls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.39717427">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding>
+                <element signature="e#24#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewCls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/viewCls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="e#130#178#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,8 +68,8 @@
       <file leaf-file-name="authCls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/authCls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="109" column="21" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
+            <state vertical-scroll-proportion="2.3793104">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="e#24#50#0" expanded="true" />
               </folding>
@@ -53,24 +77,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registerCls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/registerCls.py">
+      <file leaf-file-name="generalFunctions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/generalFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-              <folding />
+              <caret line="9" column="21" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registerUI.pyw" pinned="false" current-in-tab="true">
+      <file leaf-file-name="registerUI.pyw" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/registerUI.pyw">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3798799">
-              <caret line="29" column="63" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
-              <folding>
-                <element signature="e#24#38#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="38" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -174,11 +198,11 @@
         <option value="$PROJECT_DIR$/code/sqlCls.py" />
         <option value="$PROJECT_DIR$/code/dbInfoCls.py" />
         <option value="$PROJECT_DIR$/index.rst" />
-        <option value="$PROJECT_DIR$/code/registerCls.py" />
-        <option value="$PROJECT_DIR$/code/view_defs.py" />
-        <option value="$PROJECT_DIR$/code/generalFunctions.py" />
         <option value="$PROJECT_DIR$/code/registerUI.pyw" />
         <option value="$PROJECT_DIR$/code/viewCls.py" />
+        <option value="$PROJECT_DIR$/code/view_defs.py" />
+        <option value="$PROJECT_DIR$/code/generalFunctions.py" />
+        <option value="$PROJECT_DIR$/code/registerCls.py" />
         <option value="$PROJECT_DIR$/code/authCls.py" />
       </list>
     </option>
@@ -546,7 +570,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1040" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="1040" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1734375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -610,9 +634,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -655,9 +677,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -735,9 +755,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="11" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -777,9 +795,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -952,30 +968,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/viewCls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#130#178#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/view_defs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="27" />
           <folding>
             <element signature="e#131#145#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/viewCls.py">
+    <entry file="file://$PROJECT_DIR$/code/generalFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34534535">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="21" />
           <folding>
-            <element signature="e#130#161#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/registerUI.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="38" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/authCls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="21" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
+        <state vertical-scroll-proportion="2.3793104">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="e#24#50#0" expanded="true" />
           </folding>
@@ -984,28 +1018,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/registerCls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/generalFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34534535">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.39717427">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
-            <element signature="e#1#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/registerUI.pyw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3798799">
-          <caret line="29" column="63" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
-          <folding>
-            <element signature="e#24#38#0" expanded="true" />
+            <element signature="e#24#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
