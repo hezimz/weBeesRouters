@@ -17,7 +17,7 @@ class ViewRegisterForm(View):
         # router type
         r_label = self.create_qlabel(reg_defs['h_r_type'])
         #r_name = self.rName()
-        self.r_value_label = self.create_qlabel("aa") # self.r_name comes from Recognize -> Router
+        self.r_value_label = self.create_qlabel("") # self.r_name comes from Recognize -> Router
         self.r_value_label.setMaximumHeight(30)
         self.r_value_label.setFrameShape(QFrame.Panel)
         self.r_value_label.setFrameShadow(QFrame.Sunken)
@@ -92,7 +92,7 @@ class ViewRegisterForm(View):
 
         # set the widgets on the layout
         grid = QGridLayout()
-
+        lowerVBox = QVBoxLayout()
         grid.addWidget(r_label, 0, 0)
         grid.addWidget(self.r_value_label, 0, 1)
 
@@ -109,31 +109,22 @@ class ViewRegisterForm(View):
         grid.addWidget(br_label, 4, 0)
         grid.addWidget(self.br_combobox, 4, 1)
 
-        #h_box = QHBoxLayout()
-        #grid.addLayout(h_box, 5, 1)
-        #grid.addWidget(eip_label, 5, 0)
-        #h_box.addWidget(self.eip_1_octet,0)
-        #h_box.addWidget(eip_dot_label_4, 1)
-        #h_box.addWidget(self.eip_2_octet, 2)
-        #h_box.addWidget(eip_dot_label_3, 3)
-        #h_box.addWidget(self.eip_3_octet, 4)
-        #h_box.addWidget(eip_dot_label_2, 5)
-        #h_box.addWidget(self.eip_4_octet, 6)
-
         # add external ip group to grid
         grid.addLayout(self.ext_ip_grid, 5, 0,1,2 )
-
 
         grid.addWidget(geo_label, 6, 0)
         grid.addWidget(self.geo_combobox, 6, 1)
 
-        # add Network Card Data
-        grid.addLayout(self.local_ip_grid, 7, 0,1,2 )
-        grid.addLayout(self.subnet_mask_grid,8,0,1,2)
-        grid.addLayout(self.default_gateway_grid,9,0,1,2)
-        grid.addLayout(self.pref_dns_grid,10,0,1,2)
-        grid.addLayout(self.alt_dns_grid,11,0,1,2)
 
+        # add Network Card Data
+        lowerVBox.addLayout(self.local_ip_grid, 0 )
+        lowerVBox.addLayout(self.subnet_mask_grid,1)
+        lowerVBox.addLayout(self.default_gateway_grid,2)
+        lowerVBox.addLayout(self.pref_dns_grid,3)
+        lowerVBox.addLayout(self.alt_dns_grid,4)
+        grid.addLayout(lowerVBox,7,0, 1, 2)
+
+        
         grid.addWidget(self.regBtn, 5, 6)
         grid.addWidget(self.exitBtn, 6, 6)
         self.setLayout(grid)

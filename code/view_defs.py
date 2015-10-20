@@ -60,8 +60,8 @@ reg_defs['h_alt_dns_grp'] = d('Alt DNS')  # choose ip - group widget
 
 reg_defs['dot'] = d('.') # a dot between the ip octets
 reg_defs['h_geo_label'] = d('אזור גאוגרפי: ') # choose the geographic location
-reg_defs['h_register_btn'] = d(' לחץ להרשמה ')
-reg_defs['h_exit_btn'] = d(' לחץ ליציאה ')
+reg_defs['h_register_btn'] = d(' הרשמה ')
+reg_defs['h_exit_btn'] = d(' יציאה ')
 reg_defs['h_initial_register_window'] = d('רישום ראשוני ')
 
 #Qt Visual definitions

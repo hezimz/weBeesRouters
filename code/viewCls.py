@@ -2,10 +2,11 @@
 # This Class contains all the UI/View definitions
 # that are going to be used during the work of the app.
 from PyQt4.QtGui import QDialog, QPalette, QFont, QLabel, QComboBox, \
-    QLineEdit, QPushButton, QGridLayout, QHBoxLayout
-from PyQt4.QtCore import Qt, QSize
+    QLineEdit, QPushButton, QGridLayout, QHBoxLayout, QPainter, QColor
+from PyQt4.QtCore import Qt
 
 from view_defs import general_defs, reg_defs
+
 
 class View(QDialog):
 
@@ -19,6 +20,9 @@ class View(QDialog):
         self.label_font = QFont(general_defs['_font'], general_defs['label_font_size'])
         self.button_font = QFont(general_defs['_font'], general_defs['button_font_size'])
         self.header_font = QFont(general_defs['_font'], general_defs['header_font_size'], QFont.Bold)
+
+        self.painter = QPainter()
+
 
     def create_qlabel(self, string2Label):
         qlbl = QLabel(string2Label)
@@ -37,7 +41,7 @@ class View(QDialog):
         octet = QLineEdit()
         octet.setMaxLength(3)
         octet.setMaximumWidth(30)
-        octet.setPlaceholderText('999')
+        octet.setPlaceholderText('0')
         return octet
 
     def create_button(self, buttonLabel):
@@ -76,3 +80,11 @@ class View(QDialog):
 
         return group['grid']
 
+    def line(self, x1, y1, x2, y2):
+        self.painter.begin(self)
+        qcolor = QColor()
+        self.painter.setPen(qcolor.red())
+        print self.painter.pen()
+        self.painter.drawLine(x1, y1, x2, y2)
+
+        self.painter.end()
