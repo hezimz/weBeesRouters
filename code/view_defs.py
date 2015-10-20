@@ -50,7 +50,14 @@ reg_defs['h_buss_det'] = d('פרטי העסק: ')
 reg_defs['h_choose_cust'] = d('בחירת לקוח: ') # Customer
 reg_defs['h_choose_fr'] = d('בחירת רשת: ') # frenchise
 reg_defs['h_choose_br'] = d('בחירת סניף: ') # branch
-reg_defs['h_choose_ip'] = d('בחירת IP: ') # choose ip
+reg_defs['h_choose_ip_grp'] = d('IP חיצוני: ') # choose ip - group widget
+
+reg_defs['h_local_ip_grp'] = d('Local IP')  # choose ip - group widget
+reg_defs['h_subnet_mask_grp'] = d('Subnet Mask')  # choose ip - group widget
+reg_defs['h_default_gateway_grp'] = d('Default Gateway')  # choose ip - group widget
+reg_defs['h_pref_dns_grp'] = d('Pref DNS')  # choose ip - group widget
+reg_defs['h_alt_dns_grp'] = d('Alt DNS')  # choose ip - group widget
+
 reg_defs['dot'] = d('.') # a dot between the ip octets
 reg_defs['h_geo_label'] = d('אזור גאוגרפי: ') # choose the geographic location
 reg_defs['h_register_btn'] = d(' לחץ להרשמה ')

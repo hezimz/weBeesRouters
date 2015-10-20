@@ -61,18 +61,18 @@ class ViewRegisterForm(View):
         #self.br_combobox.addItems(sorted(self.branchDict.keys()))
         #self.alighCombobox(self.br_combobox)
 
-        # External IP
-        eip_label = self.create_qlabel(reg_defs['h_choose_ip'])
-        self.eip_1_octet = self.create_octet()
-        self.eip_2_octet = self.create_octet()
-        self.eip_3_octet = self.create_octet()
-        self.eip_4_octet = self.create_octet()
-
-        eip_dot_label_1 = self.create_qlabel(reg_defs['dot'])
-        eip_dot_label_2 = self.create_qlabel(reg_defs['dot'])
-        eip_dot_label_3 = self.create_qlabel(reg_defs['dot'])
-        eip_dot_label_4 = self.create_qlabel(reg_defs['dot'])
-
+        # External IP Group creator
+        self.ext_ip_grid = self.create_ip_style_group(reg_defs['h_choose_ip_grp'])
+        # local IP group creator
+        self.local_ip_grid = self.create_ip_style_group(reg_defs['h_local_ip_grp'])
+        # local Subnet Mask group creator
+        self.subnet_mask_grid = self.create_ip_style_group(reg_defs['h_subnet_mask_grp'])
+        # default gateway group creator
+        self.default_gateway_grid = self.create_ip_style_group(reg_defs['h_default_gateway_grp'])
+        # preferred DNS Server group creator
+        self.pref_dns_grid = self.create_ip_style_group(reg_defs['h_pref_dns_grp'])
+        # Alternate DNS Server group creator
+        self.alt_dns_grid = self.create_ip_style_group(reg_defs['h_alt_dns_grp'])
 
         # Geographic location (north ,south, center)
         geo_label = self.create_qlabel(reg_defs['h_geo_label'])
@@ -109,19 +109,31 @@ class ViewRegisterForm(View):
         grid.addWidget(br_label, 4, 0)
         grid.addWidget(self.br_combobox, 4, 1)
 
-        h_box = QHBoxLayout()
-        grid.addLayout(h_box, 5, 1)
-        grid.addWidget(eip_label, 5, 0)
-        h_box.addWidget(self.eip_1_octet,0)
-        h_box.addWidget(eip_dot_label_4, 1)
-        h_box.addWidget(self.eip_2_octet, 2)
-        h_box.addWidget(eip_dot_label_3, 3)
-        h_box.addWidget(self.eip_3_octet, 4)
-        h_box.addWidget(eip_dot_label_2, 5)
-        h_box.addWidget(self.eip_4_octet, 6)
+        #h_box = QHBoxLayout()
+        #grid.addLayout(h_box, 5, 1)
+        #grid.addWidget(eip_label, 5, 0)
+        #h_box.addWidget(self.eip_1_octet,0)
+        #h_box.addWidget(eip_dot_label_4, 1)
+        #h_box.addWidget(self.eip_2_octet, 2)
+        #h_box.addWidget(eip_dot_label_3, 3)
+        #h_box.addWidget(self.eip_3_octet, 4)
+        #h_box.addWidget(eip_dot_label_2, 5)
+        #h_box.addWidget(self.eip_4_octet, 6)
+
+        # add external ip group to grid
+        grid.addLayout(self.ext_ip_grid, 5, 0,1,2 )
+
 
         grid.addWidget(geo_label, 6, 0)
         grid.addWidget(self.geo_combobox, 6, 1)
+
+        # add Network Card Data
+        grid.addLayout(self.local_ip_grid, 7, 0,1,2 )
+        grid.addLayout(self.subnet_mask_grid,8,0,1,2)
+        grid.addLayout(self.default_gateway_grid,9,0,1,2)
+        grid.addLayout(self.pref_dns_grid,10,0,1,2)
+        grid.addLayout(self.alt_dns_grid,11,0,1,2)
+
         grid.addWidget(self.regBtn, 5, 6)
         grid.addWidget(self.exitBtn, 6, 6)
         self.setLayout(grid)

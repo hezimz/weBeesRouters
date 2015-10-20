@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # This Class contains all the UI/View definitions
 # that are going to be used during the work of the app.
-from PyQt4.QtGui import QDialog, QPalette, QFont, QLabel, QComboBox, QLineEdit, QPushButton
-from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QDialog, QPalette, QFont, QLabel, QComboBox, \
+    QLineEdit, QPushButton, QGridLayout, QHBoxLayout
+from PyQt4.QtCore import Qt, QSize
 
-from view_defs import general_defs
+from view_defs import general_defs, reg_defs
 
 class View(QDialog):
 
@@ -22,10 +23,12 @@ class View(QDialog):
     def create_qlabel(self, string2Label):
         qlbl = QLabel(string2Label)
         qlbl.setFont(self.label_font)
+        qlbl.setAlignment(Qt.AlignRight)
+        if string2Label == "." : qlbl.setFixedWidth(15)
         return qlbl
 
     def create_combobox(self):
-        comboboxMinWidth = 180
+        comboboxMinWidth = 200
         cb = QComboBox()
         cb.setMinimumWidth(comboboxMinWidth)
         return cb
@@ -34,9 +37,42 @@ class View(QDialog):
         octet = QLineEdit()
         octet.setMaxLength(3)
         octet.setMaximumWidth(30)
+        octet.setPlaceholderText('999')
         return octet
 
     def create_button(self, buttonLabel):
         b = QPushButton(buttonLabel)
         b.setFont(self.button_font)
         return b
+
+    def create_ip_style_group(self, groupName):
+
+        group = dict()
+        group['name'] = self.create_qlabel(groupName)
+        group['octet1'] = self.create_octet()
+        group['octet2'] = self.create_octet()
+        group['octet3'] = self.create_octet()
+        group['octet4'] = self.create_octet()
+
+        group['dotLbl1'] = self.create_qlabel(reg_defs['dot'])
+        group['dotLbl2'] = self.create_qlabel(reg_defs['dot'])
+        group['dotLbl3'] = self.create_qlabel(reg_defs['dot'])
+
+        group['grid'] = QGridLayout()
+        name_h_box = QHBoxLayout()
+        h_box = QHBoxLayout()
+
+        group['grid'].addLayout(name_h_box, 0, 0)
+        group['grid'].addLayout(h_box, 0, 1)
+
+        name_h_box.addWidget(group['name'])
+        h_box.addWidget(group['octet1'])
+        h_box.addWidget(group['dotLbl1'])
+        h_box.addWidget(group['octet2'])
+        h_box.addWidget(group['dotLbl2'])
+        h_box.addWidget(group['octet3'])
+        h_box.addWidget(group['dotLbl3'])
+        h_box.addWidget(group['octet4'])
+
+        return group['grid']
+
