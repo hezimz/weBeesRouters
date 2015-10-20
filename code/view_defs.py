@@ -47,6 +47,15 @@ auth_defs['en_support'] = d("Contact Us: Support @WeBees.co.il")
 reg_defs = dict()
 reg_defs['h_r_type'] = d('סוג ראוטר')
 reg_defs['h_buss_det'] = d('פרטי העסק: ')
+reg_defs['h_choose_cust'] = d('בחירת לקוח: ') # Customer
+reg_defs['h_choose_fr'] = d('בחירת רשת: ') # frenchise
+reg_defs['h_choose_br'] = d('בחירת סניף: ') # branch
+reg_defs['h_choose_ip'] = d('בחירת IP: ') # choose ip
+reg_defs['dot'] = d('.') # a dot between the ip octets
+reg_defs['h_geo_label'] = d('אזור גאוגרפי: ') # choose the geographic location
+reg_defs['h_register_btn'] = d(' לחץ להרשמה ')
+reg_defs['h_exit_btn'] = d(' לחץ ליציאה ')
+reg_defs['h_initial_register_window'] = d('רישום ראשוני ')
 
 #Qt Visual definitions
 qt_v_defs = dict()
@@ -56,10 +65,6 @@ qt_v_defs['qt_header_font'] = QFont(general_defs['_font'], general_defs['header_
 qt_v_defs['align_r'] = Qt.AlignRight
 qt_v_defs['align_l'] = Qt.AlignLeft
 
-
-# Register GUI
-regsiter_defs = dict()
-regsiter_defs['h_initial_register'] = 'רישום ראשוני '
 
 # Routine GUI
 routine_defs = dict()

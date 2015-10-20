@@ -7,22 +7,20 @@ from recognizeCls import Recognize
 from userCls import User
 
 from viewCls import View
-from view_defs import reg_defs, auth_defs, general_defs
+from view_defs import reg_defs, general_defs
 from generalFunctions import get_scaled_pixmap
 
 class ViewRegisterForm(View):
     def __init__(self):
         super(ViewRegisterForm, self).__init__()
-        self.comboboxMinWidth = 180
-
+        View.__init__(self)
         # router type
-        r_label = QLabel(reg_defs['h_r_type'])
-        r_label.setFont(self.label_font)
+        r_label = self.create_qlabel(reg_defs['h_r_type'])
         #r_name = self.rName()
-        r_value = QLabel(self.r_name.upper()) # self.r_name comes from Recognize -> Router
-        r_value.setMaximumHeight(30)
-        r_value.setFrameShape(QFrame.Panel)
-        r_value.setFrameShadow(QFrame.Sunken)
+        self.r_value_label = self.create_qlabel("aa") # self.r_name comes from Recognize -> Router
+        self.r_value_label.setMaximumHeight(30)
+        self.r_value_label.setFrameShape(QFrame.Panel)
+        self.r_value_label.setFrameShadow(QFrame.Sunken)
 
         # business details
         bd_label = QLabel(reg_defs['h_buss_det'])
@@ -35,76 +33,68 @@ class ViewRegisterForm(View):
         img_label.setPixmap(get_scaled_pixmap(general_defs['_logo_small']))
 
         # customer choosing ( Beecomm, Retalix)
-        cu_label = QLabel('בחירת לקוח:'.decode('utf-8'))
-        cu_label.setFont(label_font)
-        self.cu_combobox = QComboBox()
-        self.cu_combobox.setMinimumWidth(self.comboboxMinWidth)
-        self.customersDict = self.getCustomerList()
-        self.cu_combobox.addItems(sorted(self.customersDict.keys()))
+        cu_label = self.create_qlabel(reg_defs['h_choose_cust'])
+        self.cu_combobox = self.create_combobox()
+        ####################
+        # move to controller
+        ####################
+        # self.customersDict = self.getCustomerList()
+        # self.cu_combobox.addItems(sorted(self.customersDict.keys()))
 
         # franchise name ( rami levy ,...)
-        fr_label = QLabel('בחירת רשת:'.decode('utf-8'))
-        fr_label.setFont(label_font)
-        self.fr_combobox = QComboBox()
-        self.fr_combobox.setMinimumWidth(self.comboboxMinWidth)
-        self.franchiseDict = self.getFranchisesList(self.customersDict[unicode(self.cu_combobox.currentText())])
-        self.fr_combobox.addItems(sorted(self.franchiseDict.keys()))
-        self.alighCombobox(self.fr_combobox)
+        fr_label = self.create_qlabel(reg_defs['h_choose_fr'])
+        self.fr_combobox = self.create_combobox()
+        ####################
+        # move to controller
+        ####################
+        #self.franchiseDict = self.getFranchisesList(self.customersDict[unicode(self.cu_combobox.currentText())])
+        #self.fr_combobox.addItems(sorted(self.franchiseDict.keys()))
+        #self.alighCombobox(self.fr_combobox)
 
         # branch choosing ( natanya ,rosh ha-ayn..)
-        br_label = QLabel('בחירת סניף:'.decode('utf-8'))
-        br_label.setFont(label_font)
-        self.br_combobox = QComboBox()
-        self.br_combobox.setMinimumWidth(self.comboboxMinWidth)
-        self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_combobox.currentText())])
-        self.br_combobox.addItems(sorted(self.branchDict.keys()))
-        self.alighCombobox(self.br_combobox)
+        br_label = self.create_qlabel(reg_defs['h_choose_br'])
+        self.br_combobox = self.create_combobox()
+        ####################
+        # move to controller
+        ####################
+        #self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_combobox.currentText())])
+        #self.br_combobox.addItems(sorted(self.branchDict.keys()))
+        #self.alighCombobox(self.br_combobox)
 
         # External IP
-        eip_label = QLabel('בחירת IP:'.decode('utf-8'))
-        eip_label.setFont(label_font)
-        self.eip_1_octet = QLineEdit()
-        self.eip_1_octet.setMaxLength(3)
-        self.eip_1_octet.setMaximumWidth(30)
-        self.eip_2_octet = QLineEdit()
-        self.eip_2_octet.setMaxLength(3)
-        self.eip_2_octet.setMaximumWidth(30)
-        self.eip_3_octet = QLineEdit()
-        self.eip_3_octet.setMaxLength(3)
-        self.eip_3_octet.setMaximumWidth(30)
-        self.eip_4_octet = QLineEdit()
-        self.eip_4_octet.setMaxLength(3)
-        self.eip_4_octet.setMaximumWidth(30)
-        eip_dot_label_1 = QLabel('.'.decode('utf-8'))
-        eip_dot_label_2 = QLabel('.'.decode('utf-8'))
-        eip_dot_label_3 = QLabel('.'.decode('utf-8'))
-        eip_dot_label_4 = QLabel('.'.decode('utf-8'))
-        eip_dot_label_1.setFont(label_font)
-        eip_dot_label_2.setFont(label_font)
-        eip_dot_label_3.setFont(label_font)
-        eip_dot_label_4.setFont(label_font)
+        eip_label = self.create_qlabel(reg_defs['h_choose_ip'])
+        self.eip_1_octet = self.create_octet()
+        self.eip_2_octet = self.create_octet()
+        self.eip_3_octet = self.create_octet()
+        self.eip_4_octet = self.create_octet()
+
+        eip_dot_label_1 = self.create_qlabel(reg_defs['dot'])
+        eip_dot_label_2 = self.create_qlabel(reg_defs['dot'])
+        eip_dot_label_3 = self.create_qlabel(reg_defs['dot'])
+        eip_dot_label_4 = self.create_qlabel(reg_defs['dot'])
+
 
         # Geographic location (north ,south, center)
-        geo_label = QLabel('אזור גאוגרפי:'.decode('utf-8'))
-        geo_label.setFont(label_font)
-        self.geo_combobox = QComboBox()
-        self.geo_combobox.setMinimumWidth(self.comboboxMinWidth)
-        self.zoneDict = self.getZoneList()
-        self.geo_combobox.addItems(sorted(self.zoneDict.keys()))
-        self.alighCombobox(self.geo_combobox)
+        geo_label = self.create_qlabel(reg_defs['h_geo_label'])
+        self.geo_combobox = self.create_combobox()
+        ####################
+        # move to controller
+        ####################
+        #self.zoneDict = self.getZoneList()
+        #self.geo_combobox.addItems(sorted(self.zoneDict.keys()))
+        #self.alighCombobox(self.geo_combobox)
 
         # Registr Button
-        self.regBtn = QPushButton(' לחץ להרשמה '.decode('utf-8'))
-        self.regBtn.setFont(register_btn_font)
+        self.regBtn = self.create_button(reg_defs['h_register_btn'])
 
         # Exit Button
-        self.exitBtn = QPushButton('לחץ ליציאה'.decode('utf-8'))
-        self.exitBtn.setFont(register_btn_font)
+        self.exitBtn = self.create_button(reg_defs['h_exit_btn'] )
 
         # set the widgets on the layout
         grid = QGridLayout()
+
         grid.addWidget(r_label, 0, 0)
-        grid.addWidget(r_value, 0, 1)
+        grid.addWidget(self.r_value_label, 0, 1)
 
         grid.addWidget(img_label,0, 6)
 
@@ -137,10 +127,20 @@ class ViewRegisterForm(View):
         self.setLayout(grid)
 
 
-class CtrlRegisterForm():
-    def __init__(self):
+class CtrlRegisterForm(ViewRegisterForm, SqlFunctions, User):
+    def __init__(self, user_id):
         super(CtrlRegisterForm, self).__init__()
+        #ViewRegisterForm.__init__(self)
+        SqlFunctions.__init__(self)
+        User.__init__(self)
+        self.setUserId(user_id) # user_id is received from the auth form
+        #self.r_value_label.setText(self.get_r_name())
 
+
+    def get_r_name(self):
+        recognizeInst = Recognize()
+        r_name = recognizeInst.r_name
+        return QString(r_name)
 
 class RegisterForm(QDialog, SqlFunctions, User):
     def __init__(self, user_id):
