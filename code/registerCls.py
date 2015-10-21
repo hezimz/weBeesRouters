@@ -22,11 +22,12 @@ class ViewRegisterForm(View):
         self.r_value_label.setFrameShape(QFrame.Panel)
         self.r_value_label.setFrameShadow(QFrame.Sunken)
 
-        # business details
-        bd_label = QLabel(reg_defs['h_buss_det'])
-        bd_label.setFrameStyle(QFrame.Sunken)
-        bd_label.setFont(self.header_font)
-        bd_label.setPalette(self.palette)
+        # business details Header
+        bd_label = self.create_qlabel(reg_defs['h_buss_det'], 'header')
+        # bd_label = QLabel(reg_defs['h_buss_det'])
+        # bd_label.setFont(self.header_font)
+        # bd_label.setFrameStyle(QFrame.Sunken)
+        # bd_label.setPalette(self.palette)
 
         # webees image
         img_label = QLabel()
@@ -61,18 +62,34 @@ class ViewRegisterForm(View):
         #self.br_combobox.addItems(sorted(self.branchDict.keys()))
         #self.alighCombobox(self.br_combobox)
 
+        # Background label to lay under the network details
+        # i use two labels do defer between dns data and the rest
+        bg_ip_label = self.create_label_as_bg()
+        bg_dns_label = self.create_label_as_bg()
+
+        # network card info header
+        nc_label = self.create_qlabel(reg_defs['h_network_card_info'], 'header')
+
         # External IP Group creator
-        self.ext_ip_grid = self.create_ip_style_group(reg_defs['h_choose_ip_grp'])
+        self.ext_ip_group = self.create_ip_style_group(reg_defs['h_choose_ip_grp'])
+        self.ext_ip_grid = self.ext_ip_group['grid']
+        self.ext_ip_group['octet3'].setPlaceholderText('192')
+        self.ext_ip_group['octet4'].setPlaceholderText('168')
         # local IP group creator
-        self.local_ip_grid = self.create_ip_style_group(reg_defs['h_local_ip_grp'])
+        self.local_ip_group = self.create_ip_style_group(reg_defs['h_local_ip_grp'])
+        self.local_ip_grid = self.local_ip_group['grid']
         # local Subnet Mask group creator
-        self.subnet_mask_grid = self.create_ip_style_group(reg_defs['h_subnet_mask_grp'])
+        self.subnet_mask_group = self.create_ip_style_group(reg_defs['h_subnet_mask_grp'])
+        self.subnet_mask_grid = self.subnet_mask_group['grid']
         # default gateway group creator
-        self.default_gateway_grid = self.create_ip_style_group(reg_defs['h_default_gateway_grp'])
+        self.default_gateway_group = self.create_ip_style_group(reg_defs['h_default_gateway_grp'])
+        self.default_gateway_grid = self.default_gateway_group['grid']
         # preferred DNS Server group creator
-        self.pref_dns_grid = self.create_ip_style_group(reg_defs['h_pref_dns_grp'])
+        self.pref_dns_group = self.create_ip_style_group(reg_defs['h_pref_dns_grp'])
+        self.pref_dns_grid = self.pref_dns_group['grid']
         # Alternate DNS Server group creator
-        self.alt_dns_grid = self.create_ip_style_group(reg_defs['h_alt_dns_grp'])
+        self.alt_dns_group = self.create_ip_style_group(reg_defs['h_alt_dns_grp'])
+        self.alt_dns_grid = self.alt_dns_group['grid']
 
         # Geographic location (north ,south, center)
         geo_label = self.create_qlabel(reg_defs['h_geo_label'])
@@ -90,60 +107,69 @@ class ViewRegisterForm(View):
         # Exit Button
         self.exitBtn = self.create_button(reg_defs['h_exit_btn'] )
 
+        ################################
         # set the widgets on the layout
-        grid = QGridLayout()
-        lowerVBox = QVBoxLayout()
-        grid.addWidget(r_label, 0, 0)
-        grid.addWidget(self.r_value_label, 0, 1)
+        ################################
+        self.grid = QGridLayout()
+        local_ip_vbox = QVBoxLayout()
+        dns_vbox = QVBoxLayout()
 
-        grid.addWidget(img_label,0, 6)
+        self.grid.addWidget(r_label, 0, 0)
+        self.grid.addWidget(self.r_value_label, 0, 1)
 
-        grid.addWidget(bd_label, 1, 0)
+        self.grid.addWidget(img_label,0, 6)
 
-        grid.addWidget(cu_label, 2, 0)
-        grid.addWidget(self.cu_combobox, 2, 1)
+        self.grid.addWidget(bd_label, 1, 0)
 
-        grid.addWidget(fr_label, 3, 0)
-        grid.addWidget(self.fr_combobox, 3, 1)
+        self.grid.addWidget(cu_label, 2, 0)
+        self.grid.addWidget(self.cu_combobox, 2, 1)
 
-        grid.addWidget(br_label, 4, 0)
-        grid.addWidget(self.br_combobox, 4, 1)
+        self.grid.addWidget(fr_label, 3, 0)
+        self.grid.addWidget(self.fr_combobox, 3, 1)
+
+        self.grid.addWidget(br_label, 4, 0)
+        self.grid.addWidget(self.br_combobox, 4, 1)
 
         # add external ip group to grid
-        grid.addLayout(self.ext_ip_grid, 5, 0,1,2 )
+        self.grid.addLayout(self.ext_ip_grid, 5, 0,1,2 )
 
-        grid.addWidget(geo_label, 6, 0)
-        grid.addWidget(self.geo_combobox, 6, 1)
+        self.grid.addWidget(geo_label, 6, 0)
+        self.grid.addWidget(self.geo_combobox, 6, 1)
 
 
         # add Network Card Data
-        lowerVBox.addLayout(self.local_ip_grid, 0 )
-        lowerVBox.addLayout(self.subnet_mask_grid,1)
-        lowerVBox.addLayout(self.default_gateway_grid,2)
-        lowerVBox.addLayout(self.pref_dns_grid,3)
-        lowerVBox.addLayout(self.alt_dns_grid,4)
-        grid.addLayout(lowerVBox,7,0, 1, 2)
+        self.grid.addWidget(nc_label,7,0)
+        local_ip_vbox.addLayout(self.local_ip_grid, 0 )
+        local_ip_vbox.addLayout(self.subnet_mask_grid,1)
+        local_ip_vbox.addLayout(self.default_gateway_grid,2)
+        dns_vbox.addLayout(self.pref_dns_grid,3)
+        dns_vbox.addLayout(self.alt_dns_grid,4)
 
-        
-        grid.addWidget(self.regBtn, 5, 6)
-        grid.addWidget(self.exitBtn, 6, 6)
-        self.setLayout(grid)
+        # grid.addWidget(bg_ip_label,8,0, 2, 3)
+        self.grid.addLayout(local_ip_vbox,8,0, 1, 2)
+        # grid.addWidget(bg_dns_label,9,0, 1, 2)
+        self.grid.addLayout(dns_vbox,9,0, 1, 2)
+
+        self.grid.addWidget(self.support_label, 10, 6)
+
+        self.grid.addWidget(self.regBtn, 5, 6)
+        self.grid.addWidget(self.exitBtn, 6, 6)
+        self.setLayout(self.grid)
 
 
 class CtrlRegisterForm(ViewRegisterForm, SqlFunctions, User):
     def __init__(self, user_id):
         super(CtrlRegisterForm, self).__init__()
-        #ViewRegisterForm.__init__(self)
         SqlFunctions.__init__(self)
         User.__init__(self)
         self.setUserId(user_id) # user_id is received from the auth form
-        #self.r_value_label.setText(self.get_r_name())
-
+        # self.r_value_label.setText(self.get_r_name())
 
     def get_r_name(self):
         recognizeInst = Recognize()
         r_name = recognizeInst.r_name
         return QString(r_name)
+
 
 class RegisterForm(QDialog, SqlFunctions, User):
     def __init__(self, user_id):

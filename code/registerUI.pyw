@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
-from PyQt4.QtGui import *
+from PyQt4.QtGui import QApplication, QStyleFactory
+from PyQt4.QtCore import QString
 import sys
 
-from generalFunctions import get_qicon
+from generalFunctions import get_qicon, create_app
 from manageXml import XmlParser
 from errorMsgsCls import ErrorMsgs
 from authCls import CtrlAuthForm
@@ -24,11 +25,11 @@ err_msgs_inst = ErrorMsgs(xml_parser.get_error_element())
 
 # Load Authentication Form
 logging.info("Loading authentication form")
-app = QApplication(sys.argv)
+# app = QApplication(sys.argv)
+app = create_app(sys.argv)
 
 auth_form = CtrlAuthForm(err_msgs_inst)
 auth_form.setWindowTitle(auth_defs['en_identification_window'])
-auth_form.setWindowIcon(get_qicon(general_defs['icon']))
 auth_form.setFixedSize(500, 150)
 auth_form.show()
 app.exec_()
@@ -42,8 +43,9 @@ logging.info("Loading registration form")
 
 reg_form = CtrlRegisterForm(auth_form.get_u_name_index())
 reg_form.setWindowTitle(reg_defs['h_initial_register_window'])
-# reg_form.setFixedSize(650,300)
-
+reg_form.setFixedSize(680,500)
+# guiStyle = QStyleFactory.create(u"GTK")
+# app.setStyle(guiStyle)
 reg_form.show()
 app.exec_()
 logging.info("Exit app")

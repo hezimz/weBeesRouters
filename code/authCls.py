@@ -41,22 +41,19 @@ class ViewAuthForm (View):
         super(ViewAuthForm, self).__init__()
 
         # support label
-        header_label = QLabel(auth_defs['h_auth_header'])
-        header_label.setFont(qt_v_defs['qt_header_font'])
+        header_label = self.create_qlabel(auth_defs['h_auth_header'])
 
         # webees image
         img_label = QLabel()
-        # my_pixmap = QPixmap(general_defs['_logo_small'])
-        # my_scaled_pixmap = my_pixmap.scaled(general_defs['logoH'], general_defs['logoW'], Qt.KeepAspectRatio)
         img_label.setPixmap(get_scaled_pixmap(general_defs['_logo_small']))
 
         # username
-        u_label = QLabel(auth_defs['h_username'])
-        u_label.setFont(qt_v_defs['qt_label_font'])
+        u_label = self.create_qlabel(auth_defs['h_username'])
 
         # password
-        p_label = QLabel(auth_defs['h_password'])
-        p_label.setFont(qt_v_defs['qt_label_font'])
+        p_label = self.create_qlabel(auth_defs['h_password'])
+
+
 
         # just for testing i can set the values for the user
         self.u_value = QLineEdit('BeeComm')
@@ -69,14 +66,13 @@ class ViewAuthForm (View):
         #self.auth_btn.setMaximumWidth(150)
         self.auth_btn.setFont(qt_v_defs['qt_label_font'])
         # support label
-        support_label = QLabel(auth_defs['en_support'])
+        # support_label = QLabel(auth_defs['en_support'])
 
         # set the widgets on the layout
-        grid = QGridLayout()  # create grid Object
+        # grid = QGridLayout()  # create grid Object
 
         form_grid = QGridLayout()
-
-        grid.addLayout(form_grid,0,0,1,2, qt_v_defs['align_r'])
+        self.grid.addLayout(form_grid,0,0,1,2, qt_v_defs['align_r'])
 
         form_grid.addWidget(header_label, 0, 0, qt_v_defs['align_r']) # add Gui Header
         form_grid.addWidget(u_label, 1, 0, qt_v_defs['align_r'])  # add username label to grid
@@ -85,13 +81,13 @@ class ViewAuthForm (View):
         form_grid.addWidget(self.p_value, 2, 1, qt_v_defs['align_r'])  # add password textbox to grid
 
         #img_grid.addWidget(img_label,0, 0, qt_v_defs['align_l']) # add webees icon on the left
-        grid.addWidget(img_label,0, 2, qt_v_defs['align_l']) # add webees icon on the left
+        self.grid.addWidget(img_label,0, 2, qt_v_defs['align_l']) # add webees icon on the left
 
-        grid.addWidget(self.auth_btn, 1, 1)  # add login button to the grid
+        self.grid.addWidget(self.auth_btn, 1, 1)  # add login button to the grid
 
-        grid.addWidget(support_label, 2, 2, qt_v_defs['align_r'])
+        self.grid.addWidget(self.support_label, 2, 2)
 
-        self.setLayout(grid)  # "close" grid
+        self.setLayout(self.grid)  # "close" grid
 
 
 # Here starts the Auth Controller Class definition
