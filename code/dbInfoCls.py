@@ -9,7 +9,7 @@ class DbInfo(ParamsLoader):
 
     def __init__(self):
         super(DbInfo, self).__init__()
-        # ParamsLoader.__init__(self)
+        ParamsLoader.__init__(self)
         # paramsInst = ParamsLoader()
         # self._db_params = params["db"]
         # self.db_params = paramsInst.db_params

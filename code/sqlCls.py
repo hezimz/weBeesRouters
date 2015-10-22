@@ -26,7 +26,6 @@ class SqlFunctions(DbInfo):
         self._connection_string = self.getConnString(_db, _user_id, _passwd, _host)
         self.cursor = self.getCursor()
         self.userID = "NA"
-        self.userID = "NA"
 
     def getConnString(self,_db, _user_id, _passwd, _host):
         return 'DRIVER={SQL Server};' + \

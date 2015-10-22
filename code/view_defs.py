@@ -17,9 +17,9 @@ def d(str2decode):
 
 # general 
 general_defs = dict()
+general_defs['_decoding'] = "utf-8"
 general_defs['ver'] = d('גרסה 1.0')
 general_defs['_font'] = "David"
-general_defs['_decoding'] = "utf-8"
 general_defs['popup_window_min_width'] = 400
 general_defs['_logging_level'] = logging.INFO
 general_defs['_logo_small'] = "WeBees Logo - small.png"

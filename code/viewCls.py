@@ -81,6 +81,14 @@ class View(QDialog):
         cb.setAutoFillBackground(True)
         return cb
 
+    def alighCombobox(self, comboboxWidget):
+        comboboxWidget.setEditable(True)
+        comboboxWidget.lineEdit().setReadOnly(True)
+        comboboxWidget.lineEdit().setAlignment(Qt.AlignLeft)
+        for i in range(0,comboboxWidget.count()):
+            comboboxWidget.setItemData(i, Qt.AlignLeft, Qt.TextAlignmentRole)
+        comboboxWidget.setEditable(False)
+
     def create_octet(self):
         octet = QLineEdit()
         octet.setMaxLength(3)
@@ -95,34 +103,5 @@ class View(QDialog):
         b.setAutoFillBackground(True)
         return b
 
-    def create_ip_style_group(self, groupName):
 
-        group = dict()
-        group['name'] = self.create_qlabel(groupName)
-        group['octet1'] = self.create_octet()
-        group['octet2'] = self.create_octet()
-        group['octet3'] = self.create_octet()
-        group['octet4'] = self.create_octet()
-
-        group['dotLbl1'] = self.create_qlabel(reg_defs['dot'])
-        group['dotLbl2'] = self.create_qlabel(reg_defs['dot'])
-        group['dotLbl3'] = self.create_qlabel(reg_defs['dot'])
-
-        group['grid'] = QGridLayout()
-        name_h_box = QHBoxLayout()
-        h_box = QHBoxLayout()
-
-        group['grid'].addLayout(name_h_box, 0, 0)
-        group['grid'].addLayout(h_box, 0, 1)
-
-        name_h_box.addWidget(group['name'])
-        h_box.addWidget(group['octet1'])
-        h_box.addWidget(group['dotLbl1'])
-        h_box.addWidget(group['octet2'])
-        h_box.addWidget(group['dotLbl2'])
-        h_box.addWidget(group['octet3'])
-        h_box.addWidget(group['dotLbl3'])
-        h_box.addWidget(group['octet4'])
-
-        return group
 
