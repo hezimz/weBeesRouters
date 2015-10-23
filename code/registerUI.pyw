@@ -43,7 +43,7 @@ logging.info("Loading registration form")
 
 reg_form = CtrlRegisterForm(auth_form.get_u_name_index())
 reg_form.setWindowTitle(reg_defs['h_initial_register_window'])
-reg_form.setFixedSize(680,500)
+reg_form.setFixedSize(650,500)
 # guiStyle = QStyleFactory.create(u"GTK")
 # app.setStyle(guiStyle)
 reg_form.show()

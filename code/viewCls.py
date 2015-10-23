@@ -6,7 +6,7 @@ from PyQt4.QtGui import QDialog, QPalette, QFont, QLabel, QComboBox, \
 from PyQt4.QtCore import Qt
 
 from view_defs import general_defs, reg_defs
-
+from generalFunctions import get_scaled_pixmap
 
 class View(QDialog):
 
@@ -49,6 +49,7 @@ class View(QDialog):
         ##########################
 
         self.support_label = self.create_qlabel(general_defs['en_support'], 'support')
+        self.img_label = self.create_logo_widget()
 
     def create_qlabel(self, string_to_label, wtype='label'):
         # label_type can be label, button  or header, support
@@ -103,5 +104,8 @@ class View(QDialog):
         b.setAutoFillBackground(True)
         return b
 
-
+    def create_logo_widget(self):
+        img_label = QLabel()
+        img_label.setPixmap(get_scaled_pixmap(general_defs['_logo_small']))
+        return img_label
 

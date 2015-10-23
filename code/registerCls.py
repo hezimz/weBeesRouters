@@ -17,26 +17,12 @@ class ViewRegisterForm(View):
         View.__init__(self)
         # router type
         self.router_type_group = self.create_label_label_group(reg_defs['h_r_type'])
-        self.r_label = self.router_type_group['label1']
-        self.r_value_label = self.router_type_group['label2']
-
         # business details Header
         bd_label = self.create_qlabel(reg_defs['h_buss_det'], 'header')
-
-        # webees image
-        img_label = QLabel()
-        img_label.setPixmap(get_scaled_pixmap(general_defs['_logo_small']))
-
         # customer choosing ( Beecomm, Retalix)
         self.cu_group = self.create_label_combo_group(reg_defs['h_choose_cust'])
-        self.cu_label = self.cu_group['label']
-        self.cu_combobox = self.cu_group['combo']
-
         # franchise name ( rami levy ,...)
         self.fr_group = self.create_label_combo_group(reg_defs['h_choose_fr'])
-        self.fr_label = self.fr_group['label']
-        self.fr_combobox = self.fr_group['combo']
-
         # branch choosing ( natanya ,rosh ha-ayn..)
         self.br_group = self.create_label_combo_group(reg_defs['h_choose_br'])
         self.br_label = self.br_group['label']
@@ -47,34 +33,22 @@ class ViewRegisterForm(View):
 
         # External IP Group creator
         self.ext_ip_group = self.create_ip_style_group(reg_defs['h_choose_ip_grp'])
-        self.ext_ip_grid = self.ext_ip_group['grid']
         # local IP group creator
         self.local_ip_group = self.create_ip_style_group(reg_defs['h_local_ip_grp'])
-        self.local_ip_grid = self.local_ip_group['grid']
         # local Subnet Mask group creator
         self.subnet_mask_group = self.create_ip_style_group(reg_defs['h_subnet_mask_grp'])
-        self.subnet_mask_grid = self.subnet_mask_group['grid']
         # default gateway group creator
         self.default_gateway_group = self.create_ip_style_group(reg_defs['h_default_gateway_grp'])
-        self.default_gateway_grid = self.default_gateway_group['grid']
         # preferred DNS Server group creator
         self.pref_dns_group = self.create_ip_style_group(reg_defs['h_pref_dns_grp'])
-        self.pref_dns_grid = self.pref_dns_group['grid']
         # Alternate DNS Server group creator
         self.alt_dns_group = self.create_ip_style_group(reg_defs['h_alt_dns_grp'])
-        self.alt_dns_grid = self.alt_dns_group['grid']
-
         # Geographic location (north ,south, center)
         self.geo_group = self.create_label_combo_group(reg_defs['h_geo_label'])
-        self.geo_label = self.geo_group['label']
-        self.geo_combobox = self.geo_group['combo']
-
-        # Registr Button
+        # Register Button
         self.regBtn = self.create_button(reg_defs['h_register_btn'])
-
         # Exit Button
         self.exitBtn = self.create_button(reg_defs['h_exit_btn'] )
-
         ################################
         # set the widgets on the layout
         ################################
@@ -82,41 +56,26 @@ class ViewRegisterForm(View):
         local_ip_vbox = QVBoxLayout()
         dns_vbox = QVBoxLayout()
 
-        self.grid.addWidget(self.r_label, 0, 0)
-        self.grid.addWidget(self.r_value_label, 0, 1)
-
-        self.grid.addWidget(img_label,0, 6)
-
-        self.grid.addWidget(bd_label, 1, 0)
-
-        self.grid.addWidget(self.cu_label, 2, 0)
-        self.grid.addWidget(self.cu_combobox, 2, 1)
-
-        self.grid.addWidget(self.fr_label, 3, 0)
-        self.grid.addWidget(self.fr_combobox, 3, 1)
-
-        self.grid.addWidget(self.br_label, 4, 0)
-        self.grid.addWidget(self.br_combobox, 4, 1)
-
+        self.grid.addLayout(self.router_type_group['grid'], 0, 0, 1, 2)
+        self.grid.addWidget(self.img_label,0, 6)  # webees logo
+        self.grid.addWidget(bd_label, 1, 0)  # business info header
+        self.grid.addLayout(self.cu_group['grid'], 2, 0, 1, 2)  # customer group
+        self.grid.addLayout(self.fr_group['grid'], 3, 0, 1, 2)  # frenchise group
+        self.grid.addLayout(self.br_group['grid'], 4, 0, 1, 2)  # branch group
         # add external ip group to grid
-        self.grid.addLayout(self.ext_ip_grid, 5, 0,1,2 )
-
-        self.grid.addWidget(self.geo_label, 6, 0)
-        self.grid.addWidget(self.geo_combobox, 6, 1)
-
-
+        self.grid.addLayout(self.ext_ip_group['grid'], 5, 0, 1, 2)  # xternal ip
+        # add geographic group to grid
+        self.grid.addLayout(self.geo_group['grid'], 6, 0, 1, 2)
         # add Network Card Data
         self.grid.addWidget(nc_label,7,0)
-        local_ip_vbox.addLayout(self.local_ip_grid, 0 )
-        local_ip_vbox.addLayout(self.subnet_mask_grid,1)
-        local_ip_vbox.addLayout(self.default_gateway_grid,2)
-        dns_vbox.addLayout(self.pref_dns_grid,3)
-        dns_vbox.addLayout(self.alt_dns_grid,4)
+        local_ip_vbox.addLayout(self.local_ip_group['grid'], 0)
+        local_ip_vbox.addLayout(self.subnet_mask_group['grid'], 1)
+        local_ip_vbox.addLayout(self.default_gateway_group['grid'], 2)
+        dns_vbox.addLayout(self.pref_dns_group['grid'], 3)
+        dns_vbox.addLayout(self.alt_dns_group['grid'], 4)
 
-        # grid.addWidget(bg_ip_label,8,0, 2, 3)
-        self.grid.addLayout(local_ip_vbox,8,0, 1, 2)
-        # grid.addWidget(bg_dns_label,9,0, 1, 2)
-        self.grid.addLayout(dns_vbox,9,0, 1, 2)
+        self.grid.addLayout(local_ip_vbox, 8, 0, 1, 2)
+        self.grid.addLayout(dns_vbox, 9, 0, 1, 2)
 
         self.grid.addWidget(self.support_label, 10, 6)
 
@@ -145,11 +104,16 @@ class ViewRegisterForm(View):
         :return: two horizontal labels and the second is styled
         """
         group = dict()
+        group['grid'] = QGridLayout()
+        h_box = QHBoxLayout()
+        group['grid'].addLayout(h_box, 0, 0)
         group['label1'] = self.create_qlabel(groupName)
         group['label2'] = self.create_qlabel("")
         group['label2'].setMaximumHeight(30)
         group['label2'].setFrameShape(QFrame.Panel)
         group['label2'].setFrameShadow(QFrame.Sunken)
+        h_box.addWidget(group['label1'])
+        h_box.addWidget(group['label2'])
 
         return group
 
@@ -194,28 +158,28 @@ class CtrlRegisterForm(ViewRegisterForm, SqlFunctions, Ipv4, User):
         self.router_type_group['label2'].setText(QString(self.get_r_name()))
         # set customers Combo data
         self.customersDict = self.getCustomerList()
-        self.cu_combobox.addItems(sorted(self.customersDict.keys()))
+        self.cu_group['combo'].addItems(sorted(self.customersDict.keys()))
         # set franchise combo data
-        self.franchiseDict = self.getFranchisesList(self.customersDict[unicode(self.cu_combobox.currentText())])
-        self.fr_combobox.addItems(sorted(self.franchiseDict.keys()))
+        self.franchiseDict = self.getFranchisesList(self.customersDict[
+                                                        unicode(self.cu_group['combo'].currentText())])
+        self.fr_group['combo'].addItems(sorted(self.franchiseDict.keys()))
         # set branch combo data
-        self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_combobox.currentText())])
-        self.br_combobox.addItems(sorted(self.branchDict.keys()))
+        self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_group['combo'].currentText())])
+        self.br_group['combo'].addItems(sorted(self.branchDict.keys()))
         # set default placeholder for external ip first two octets
         self.ext_ip_group['octet4'].setPlaceholderText('192')
         self.ext_ip_group['octet3'].setPlaceholderText('168')
         # set Geo location data
         self.zoneDict = self.getZoneList()
-        self.geo_combobox.addItems(sorted(self.zoneDict.keys()))
-        self.alighCombobox(self.geo_combobox)
-
-        self.set_local_ip_octets()
-
+        self.geo_group['combo'].addItems(sorted(self.zoneDict.keys()))
+        self.alighCombobox(self.geo_group['combo'])
+        # setting IPV4 infomation into octets
+        self.set_ipv4_data_into_octets()
 
         # Signals Binding
-        self.connect(self.fr_combobox,
+        self.connect(self.fr_group['combo'],
                      SIGNAL("currentIndexChanged(const QString&)"), self.updateBr)
-        self.connect(self.cu_combobox,
+        self.connect(self.cu_group['combo'],
                      SIGNAL("currentIndexChanged(const QString&)"), self.updateFr)
         self.connect(self.regBtn, SIGNAL("clicked ()"), self.FinishRegistration)
         self.connect(self.exitBtn, SIGNAL("clicked ()"), quit)
@@ -225,24 +189,38 @@ class CtrlRegisterForm(ViewRegisterForm, SqlFunctions, Ipv4, User):
         r_name = recognizeInst.r_name
         return QString(r_name)
 
-    def set_local_ip_octets(self):
-        l = self.ipv4Dict["IPv4Address"].split(".")
-        for o in ['octet1', 'octet2', 'octet3', 'octet4']:
-            self.local_ip_group[o].setText(QString(l[1]))
+    def set_ipv4_data_into_octets(self):
+        """
+        for each ipv4 data we get from the network card (WMI package)
+        we insert it to the right ip address line (local ip, dns, DG, subnet mask)
+        :return:
+        """
+        oLst = ['octet4', 'octet3', 'octet2', 'octet1']
+        pairs = {
+            self.ipv4Dict["IPv4Address"]: self.local_ip_group,
+            self.ipv4Dict["DefaultIPGateway"]: self.default_gateway_group,
+            self.ipv4Dict["Subnet Mask"]: self.subnet_mask_group,
+            self.ipv4Dict["pref DNS"]: self.pref_dns_group,
+            self.ipv4Dict["alt DNS"]: self.alt_dns_group
+        }
+        for ipv4Key in pairs:
+            l = ipv4Key.split(".")
+            for o in oLst:
+                pairs[ipv4Key][o].setText(QString(l[oLst.index(o)]))
 
 
 
     def updateBr(self):
-        self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_combobox.currentText())])
-        self.br_combobox.clear()
-        self.br_combobox.addItems(sorted(self.branchDict.keys()))
-        self.alighCombobox(self.br_combobox)
+        self.branchDict = self.getBranchList(self.franchiseDict[unicode(self.fr_group['combo'].currentText())])
+        self.br_group['combo'].clear()
+        self.br_group['combo'].addItems(sorted(self.branchDict.keys()))
+        self.alighCombobox(self.br_group['combo'])
 
     def updateFr(self):
-        self.franchiseDict = self.getFranchisesList(self.customersDict[unicode(self.cu_combobox.currentText())])
-        self.fr_combobox.clear()
-        self.fr_combobox.addItems(sorted(self.franchiseDict.keys()))
-        self.alighCombobox(self.fr_combobox)
+        self.franchiseDict = self.getFranchisesList(self.customersDict[unicode(self.cu_group['combo'].currentText())])
+        self.fr_group['combo'].clear()
+        self.fr_group['combo'].addItems(sorted(self.franchiseDict.keys()))
+        self.alighCombobox(self.fr_group['combo'])
 
     def FinishRegistration(self):
         # first update User Instances according to form data

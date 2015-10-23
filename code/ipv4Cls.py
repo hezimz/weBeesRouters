@@ -20,5 +20,6 @@ class Ipv4(object):
             self.ipv4Dict["DefaultIPGateway"] = dev.DefaultIPGateway[0]
             self.preUrl = "http://" + self.ipv4Dict["DefaultIPGateway"]
             self.ipv4Dict["Subnet Mask"] = dev.IPSubnet[0]
-            self.ipv4Dict["DNS Servers"] = dev.DNSServerSearchOrder
+            # self.ipv4Dict["DNS Servers"] = dev.DNSServerSearchOrder
+            self.ipv4Dict["pref DNS"], self.ipv4Dict["alt DNS"] = dev.DNSServerSearchOrder
 
